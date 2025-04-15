@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>For SAMYYYY 💜</title>
+    <title>For My Dickpaglu 💜</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -14,21 +14,21 @@
             overflow-x: hidden;
             cursor: pointer;
         }
-        /* Hide all slides by default */
         .slide {
             display: none;
+            position: relative;
+            animation: fadeIn 1s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         #intro-screen {
-            display: flex; /* SHOW INTRO FIRST */
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            animation: fadeIn 1s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         #music-button {
             background: transparent;
@@ -37,6 +37,7 @@
             cursor: pointer;
             animation: pulse 2s infinite, glow 1.5s infinite alternate;
             margin-top: 30px;
+            transition: all 0.3s;
         }
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -45,30 +46,196 @@
         }
         @keyframes glow {
             from { text-shadow: 0 0 10px #ff00de; }
-            to { text-shadow: 0 0 30px #ff00de; }
+            to { text-shadow: 0 0 30px #ff00de, 0 0 40px #ff69b4; }
+        }
+        .floating-heart {
+            position: absolute;
+            font-size: 24px;
+            animation: float 8s linear infinite;
+            opacity: 0.7;
+            z-index: -1;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        #password-input {
+            padding: 15px;
+            font-size: 1.2em;
+            width: 250px;
+            border-radius: 50px;
+            border: 2px solid #FFD700;
+            margin: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        .continue-hint {
+            font-size: 1em;
+            color: rgba(255,255,255,0.8);
+            margin-top: 40px;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        .confetti-heart {
+            position: fixed;
+            font-size: 20px;
+            animation: confettiFall 5s linear forwards;
+            z-index: 100;
+        }
+        @keyframes confettiFall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .response-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            margin: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #yes-btn {
+            background: #FF69B4;
+            color: white;
+        }
+        #no-btn {
+            background: #9B30FF;
+            color: white;
+        }
+        #final-ligma {
+            font-size: 10em;
+            animation: rainbow 2s infinite;
+            margin-top: 100px;
+        }
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            14% { color: #ff7f00; }
+            28% { color: #ffff00; }
+            42% { color: #00ff00; }
+            57% { color: #0000ff; }
+            71% { color: #4b0082; }
+            85% { color: #9400d3; }
+            100% { color: #ff0000; }
+        }
+        /* PLEASE text styles */
+        .please-text {
+            position: absolute;
+            font-weight: bold;
+            animation: pleaseFloat linear infinite;
+            opacity: 0;
+            text-shadow: 0 0 5px rgba(255,255,255,0.7);
+            pointer-events: none;
+        }
+        #please-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 10;
+        }
+        /* Balls confetti */
+        .ball-confetti {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: ballFall 3s linear forwards;
+            z-index: 1000;
+            background: radial-gradient(circle at 30% 30%, #fff, #FF69B4);
+            box-shadow: 0 0 10px #FF69B4;
+        }
+        @keyframes ballFall {
+            to { 
+                transform: translateY(100vh) rotate(360deg); 
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- INTRO SCREEN (VISIBLE FIRST) -->
+    <!-- INTRO SCREEN -->
     <div id="intro-screen">
-        <h1>Play Me</h1>
-        <h2>uWu</h2>
-        <button id="music-button">♥</button>
+        <h1>Play Me 💖</h1>
+        <h2>For My Dickpaglu ✨</h2>
+        <button id="music-button">💘</button>
+        <p class="continue-hint">(Touch the heart to begin)</p>
     </div>
 
-    <!-- PASSWORD SCREEN (HIDDEN INITIALLY) -->
+    <!-- PASSWORD SCREEN -->
     <div class="slide" id="password-screen">
-        <h1>Mujhe kaun sabse zyada pasand hai?</h1>
-        <div id="password-form">
-            <input type="text" id="password-input" placeholder="Your answer...">
-            <button onclick="checkPassword()">Submit</button>
+        <h1>Mujhe kaun sabse zyada pasand hai? 💭</h1>
+        <input type="text" id="password-input" placeholder="Type our special name...">
+        <button onclick="checkPassword()" style="
+            padding: 12px 30px;
+            background: #FFD700;
+            color: #8A2BE2;
+            font-weight: bold;
+            border-radius: 50px;
+        ">Submit 💌</button>
+        <div id="password-hearts"></div>
+    </div>
+
+    <!-- ROMANTIC SLIDES -->
+    <div class="slide" id="slide1">
+        <h1>Dekho ab wo pal aagaya 🌟</h1>
+        <h2>Jiska tumhe itne samay se intezaar thha... hehe 😊</h2>
+        <p class="continue-hint">(Click anywhere if you love ligma)</p>
+    </div>
+
+    <div class="slide" id="slide2">
+        <h1>Samjhi? 🤔💭</h1>
+        <p>Yeh sab tumhare liye hai... 👉🏻👈🏻</p>
+        <p class="continue-hint">(Your balls melt my heart ❤️)</p>
+    </div>
+
+    <div class="slide" id="slide3">
+        <h1>I Wanna Spend My Whole Life With You 🌈</h1>
+        <p>My babygirl 👶🏽💖 My sweetheart 🍬 My princess 👑 My gorgeous 💫 My everything! ✨</p>
+        <p class="continue-hint">(Press any key to feel deez nuts)</p>
+    </div>
+
+    <!-- BOYFRIEND QUESTION -->
+    <div class="slide" id="boyfriend-question">
+        <h1>Will you please let me be your boyfriend? 💍</h1>
+        <h2>Will you be mine forever? 💘</h2>
+        <p class="continue-hint">(Click anywhere to continue)</p>
+    </div>
+
+    <!-- PLEASE PLEASE PLEASE -->
+    <div class="slide" id="please-slide">
+        <h1 style="position: relative; z-index: 1000;">PLEASE PLEASE PLEASE</h1>
+        <div id="please-container"></div>
+    </div>
+
+    <!-- FINAL ANSWER OPTIONS -->
+    <div class="slide" id="final-answer">
+        <div id="final-question" style="position: relative; z-index: 1000;">
+            <h1>So... what do you say? 🥺</h1>
+            <button id="final-yes-btn" class="response-btn">YES! 💘</button>
+            <button id="final-no-btn" class="response-btn">NO 😢</button>
         </div>
     </div>
 
-    <!-- REST OF YOUR SLIDES... -->
-    <div class="slide" id="slide1">[...]</div>
-    <div class="slide" id="slide2">[...]</div>
+    <!-- I KNEW IT -->
+    <div class="slide" id="iknew-slide">
+        <h1>I knew you'd say yes baby 😘</h1>
+        <p>Now prepare for unlimited cuddles! 🤗</p>
+    </div>
+
+    <!-- I LOVE YOU IN 69 LANGUAGES -->
+    <div class="slide" id="languages-slide">
+        <h1>I LOVE YOU in 69 languages 💋</h1>
+        <div id="languages-container"></div>
+    </div>
+
+    <!-- FINAL LIGMA -->
+    <div class="slide" id="final-ligma-slide">
+        <h1 id="final-ligma">LIGMA</h1>
+    </div>
 
     <!-- AUDIO PLAYER -->
     <audio id="bg-music" loop>
@@ -76,25 +243,226 @@
     </audio>
 
     <script>
-        // INTRO BUTTON - SHOW PASSWORD SCREEN AFTER CLICK
+        // ====== SLIDE MANAGEMENT ======
+        let currentSlide = 0;
+        const slides = [
+            "intro-screen",
+            "password-screen",
+            "slide1",
+            "slide2",
+            "slide3",
+            "boyfriend-question",
+            "please-slide",
+            "final-answer",
+            "iknew-slide",
+            "languages-slide",
+            "final-ligma-slide"
+        ];
+
+        function showSlide(index) {
+            // Create floating hearts transition
+            if (index > 0) createHearts(15);
+            
+            // Hide all slides
+            document.querySelectorAll('.slide, #intro-screen').forEach(el => {
+                el.style.display = 'none';
+            });
+            // Show requested slide
+            document.getElementById(slides[index]).style.display = 'block';
+            currentSlide = index;
+            
+            // Special effects for certain slides
+            if (index === 2) createConfettiHearts(10);
+            if (index === 6) setupPlease();
+            if (index === 9) setupLanguages();
+            if (index === 5 || index === 8) createConfettiHearts(30);
+        }
+
+        // ====== ANIMATIONS ======
+        function createHearts(count) {
+            const colors = ['#FFD700', '#FF69B4', '#E6E6FA', '#FF1493'];
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = ['💖', '💘', '💝', '💗', '💓'][Math.floor(Math.random() * 5)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = 3 + Math.random() * 7 + 's';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 8000);
+            }
+        }
+
+        function createConfettiHearts(count) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'confetti-heart';
+                    heart.innerHTML = ['💖', '💘', '💝'][Math.floor(Math.random() * 3)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = 10 + Math.random() * 30 + 'px';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 5000);
+                }, i * 300);
+            }
+        }
+
+        function createBallConfetti(count) {
+            const colors = ['#FF69B4', '#9B30FF', '#FFD700', '#FFFFFF', '#DA70D6'];
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const ball = document.createElement('div');
+                    ball.className = 'ball-confetti';
+                    ball.style.left = Math.random() * 100 + 'vw';
+                    ball.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    ball.style.width = (15 + Math.random() * 25) + 'px';
+                    ball.style.height = ball.style.width;
+                    ball.style.animationDuration = (2 + Math.random() * 3) + 's';
+                    document.body.appendChild(ball);
+                    setTimeout(() => ball.remove(), 5000);
+                }, i * 100);
+            }
+        }
+
+        // ====== SPECIAL SLIDES ======
+        function setupPlease() {
+            const container = document.getElementById("please-container");
+            container.innerHTML = ''; // Clear previous
+            
+            const colors = ['#FF69B4', '#FFD700', '#FFFFFF', '#DA70D6', 
+                           '#FF1493', '#E6E6FA', '#FF00FF', '#FFA500',
+                           '#8A2BE2', '#9400D3', '#4B0082'];
+            
+            // Create 150 different PLEASE texts
+            for (let i = 0; i < 150; i++) {
+                const please = document.createElement("div");
+                please.className = "please-text";
+                please.textContent = "PLEASE";
+                please.style.left = Math.random() * 100 + 'vw';
+                please.style.color = colors[Math.floor(Math.random() * colors.length)];
+                please.style.fontSize = (1.5 + Math.random() * 4) + 'em';
+                please.style.animationDuration = (8 + Math.random() * 12) + 's';
+                please.style.animationDelay = (Math.random() * 5) + 's';
+                please.style.zIndex = Math.floor(Math.random() * 10);
+                
+                // Create unique animation for each PLEASE
+                const startRotate = Math.random() * 360;
+                const endRotate = startRotate + (Math.random() * 360 - 180);
+                const startScale = 0.3 + Math.random() * 0.7;
+                const endScale = 1 + Math.random() * 1.5;
+                
+                const keyframes = `
+                    @keyframes pleaseFloat-${i} {
+                        0% { 
+                            transform: translateY(100vh) rotate(${startRotate}deg) scale(${startScale}); 
+                            opacity: 0; 
+                        }
+                        10% { opacity: 1; }
+                        90% { opacity: 1; }
+                        100% { 
+                            transform: translateY(-100px) rotate(${endRotate}deg) scale(${endScale}); 
+                            opacity: 0;
+                        }
+                    }
+                `;
+                
+                const style = document.createElement('style');
+                style.innerHTML = keyframes;
+                document.head.appendChild(style);
+                
+                please.style.animationName = `pleaseFloat-${i}`;
+                container.appendChild(please);
+            }
+        }
+
+        function setupLanguages() {
+            const languages = [
+                "Spanish: Te amo", "French: Je t'aime", 
+                "German: Ich liebe dich", "Italian: Ti amo",
+                "Japanese: 愛してる", "Korean: 사랑해",
+                "Russian: Я тебя люблю", "Hindi: मैं तुमसे प्यार करता हूँ",
+                "Arabic: أحبك", "Chinese: 我爱你",
+                "Portuguese: Eu te amo", "Dutch: Ik hou van je",
+                "69th Language: LIGMA 💋"
+            ];
+            
+            const container = document.getElementById("languages-container");
+            languages.forEach(lang => {
+                const p = document.createElement("p");
+                p.textContent = lang;
+                p.style.fontSize = "1.3em";
+                p.style.margin = "10px";
+                container.appendChild(p);
+            });
+        }
+
+        // ====== EVENT HANDLERS ======
+        // Music Button
         document.getElementById('music-button').addEventListener('click', function() {
             const music = document.getElementById('bg-music');
             music.volume = 0.3;
-            music.play();
-            
-            // Hide intro, show password screen
-            document.getElementById('intro-screen').style.display = 'none';
-            document.getElementById('password-screen').style.display = 'block';
+            music.play().catch(e => console.log("Playback prevented"));
+            showSlide(1);
+            createHearts(20);
         });
 
-        // YOUR EXISTING PASSWORD CHECK FUNCTION
+        // Password Check
         function checkPassword() {
             const answer = document.getElementById("password-input").value.toLowerCase();
             if (["samy", "sameeksha", "samoyed"].includes(answer)) {
-                document.getElementById("password-screen").style.display = "none";
-                document.getElementById("slide1").style.display = "block";
+                createConfettiHearts(15);
+                showSlide(2);
+            } else {
+                // Animate wrong answer
+                const input = document.getElementById("password-input");
+                input.style.animation = 'shake 0.5s';
+                setTimeout(() => input.style.animation = '', 500);
+                document.getElementById("password-hearts").innerHTML = '❌ Try again! Hint: It\'s a name I love 💜';
             }
         }
+
+        // Click/Key Advance
+        document.addEventListener('click', function() {
+            if (currentSlide >= 1 && currentSlide < slides.length - 1 && currentSlide !== 7) {
+                showSlide(currentSlide + 1);
+            }
+        });
+        
+        document.addEventListener('keypress', function(e) {
+            if (currentSlide >= 1 && currentSlide < slides.length - 1 && 
+                (e.code === "Space" || e.code === "Enter") && currentSlide !== 7) {
+                showSlide(currentSlide + 1);
+            }
+        });
+
+        // Final Response Buttons
+        document.getElementById('final-yes-btn').addEventListener('click', function() {
+            createConfettiHearts(100);
+            createBallConfetti(100); // Add balls confetti
+            showSlide(8); // Go to "I knew it" slide
+        });
+
+        document.getElementById('final-no-btn').addEventListener('click', function() {
+            this.innerHTML = ["Try Again!", "Say YES!", "Please?"][Math.floor(Math.random() * 3)];
+            this.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 50 - 25}px)`;
+        });
+
+        // ====== INITIALIZE ======
+        showSlide(0); // Start with intro screen
+        createHearts(10); // Initial floating hearts
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                20% { transform: translateX(-10px); }
+                40% { transform: translateX(10px); }
+                60% { transform: translateX(-10px); }
+                80% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
