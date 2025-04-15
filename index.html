@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For SAMYYYY 💜</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #8A2BE2, #DA70D6, #9400D3);
+            text-align: center;
+            padding: 50px;
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: pointer;
+        }
+        .slide {
+            display: none;
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #intro-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #music-button {
+            background: transparent;
+            border: none;
+            font-size: 4em;
+            cursor: pointer;
+            animation: pulse 2s infinite, glow 1.5s infinite alternate;
+            margin-top: 30px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ff00de; }
+            to { text-shadow: 0 0 30px #ff00de; }
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        /* Your existing styles... */
+    </style>
+</head>
+<body>
+    <!-- INTRO SCREEN (NEW) -->
+    <div id="intro-screen">
+        <h1>Play Me</h1>
+        <h2>uWu</h2>
+        <button id="music-button">♥</button>
+    </div>
+
+    <!-- PASSWORD SCREEN (now slide2) -->
+    <div class="slide" id="slide1">
+        <h1>Mujhe kaun sabse zyada pasand hai?</h1>
+        <div id="password-form">
+            <input type="text" id="password-input" placeholder="Your answer...">
+            <button onclick="checkPassword()">Submit</button>
+        </div>
+    </div>
+
+    <!-- REST OF YOUR SLIDES... -->
+    <!-- (Keep all your existing slide divs here) -->
+
+    <!-- AUDIO PLAYER -->
+    <audio id="bg-music" loop>
+        <source src="305.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // INTRO MUSIC BUTTON
+        document.getElementById('music-button').addEventListener('click', function() {
+            const music = document.getElementById('bg-music');
+            music.volume = 0.3;
+            music.play();
+            
+            // Hide intro, show password screen after 2 seconds
+            setTimeout(() => {
+                document.getElementById('intro-screen').style.display = 'none';
+                document.getElementById('slide1').style.display = 'block';
+            }, 2000);
+        });
+
+        // YOUR EXISTING JAVASCRIPT...
+        // (Keep all your other functions like checkPassword(), showSlide(), etc.)
+    </script>
+</body>
+</html>
