@@ -14,20 +14,21 @@
             overflow-x: hidden;
             cursor: pointer;
         }
+        /* Hide all slides by default */
         .slide {
             display: none;
-            animation: fadeIn 1s forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         #intro-screen {
-            display: flex;
+            display: flex; /* SHOW INTRO FIRST */
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            animation: fadeIn 1s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         #music-button {
             background: transparent;
@@ -46,24 +47,18 @@
             from { text-shadow: 0 0 10px #ff00de; }
             to { text-shadow: 0 0 30px #ff00de; }
         }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        /* Your existing styles... */
     </style>
 </head>
 <body>
-    <!-- INTRO SCREEN (NEW) -->
+    <!-- INTRO SCREEN (VISIBLE FIRST) -->
     <div id="intro-screen">
         <h1>Play Me</h1>
         <h2>uWu</h2>
         <button id="music-button">♥</button>
     </div>
 
-    <!-- PASSWORD SCREEN (now slide2) -->
-    <div class="slide" id="slide1">
+    <!-- PASSWORD SCREEN (HIDDEN INITIALLY) -->
+    <div class="slide" id="password-screen">
         <h1>Mujhe kaun sabse zyada pasand hai?</h1>
         <div id="password-form">
             <input type="text" id="password-input" placeholder="Your answer...">
@@ -72,7 +67,8 @@
     </div>
 
     <!-- REST OF YOUR SLIDES... -->
-    <!-- (Keep all your existing slide divs here) -->
+    <div class="slide" id="slide1">[...]</div>
+    <div class="slide" id="slide2">[...]</div>
 
     <!-- AUDIO PLAYER -->
     <audio id="bg-music" loop>
@@ -80,21 +76,25 @@
     </audio>
 
     <script>
-        // INTRO MUSIC BUTTON
+        // INTRO BUTTON - SHOW PASSWORD SCREEN AFTER CLICK
         document.getElementById('music-button').addEventListener('click', function() {
             const music = document.getElementById('bg-music');
             music.volume = 0.3;
             music.play();
             
-            // Hide intro, show password screen after 2 seconds
-            setTimeout(() => {
-                document.getElementById('intro-screen').style.display = 'none';
-                document.getElementById('slide1').style.display = 'block';
-            }, 2000);
+            // Hide intro, show password screen
+            document.getElementById('intro-screen').style.display = 'none';
+            document.getElementById('password-screen').style.display = 'block';
         });
 
-        // YOUR EXISTING JAVASCRIPT...
-        // (Keep all your other functions like checkPassword(), showSlide(), etc.)
+        // YOUR EXISTING PASSWORD CHECK FUNCTION
+        function checkPassword() {
+            const answer = document.getElementById("password-input").value.toLowerCase();
+            if (["samy", "sameeksha", "samoyed"].includes(answer)) {
+                document.getElementById("password-screen").style.display = "none";
+                document.getElementById("slide1").style.display = "block";
+            }
+        }
     </script>
 </body>
 </html>
